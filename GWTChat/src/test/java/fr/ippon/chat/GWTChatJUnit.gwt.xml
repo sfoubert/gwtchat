@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <!-- Inherit our applications main module.                      -->
+  <inherits name='fr.ippon.chat.GWTChat'/>
+
+  <!-- Specify the path to any remote services.                   -->
+  <servlet path="/gwtchat/greet" class="fr.ippon.chat.server.GreetingServiceImpl" />
+
+</module>
