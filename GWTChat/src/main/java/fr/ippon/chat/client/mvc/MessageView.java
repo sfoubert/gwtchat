@@ -30,6 +30,7 @@ public class MessageView extends View {
 
 	MessageListPanel messageListPanel;
 
+
 	public MessageView(Controller controller) {
 		super(controller);
 	}
@@ -50,25 +51,25 @@ public class MessageView extends View {
 	protected void handleEvent(AppEvent event) {
 		if (event.getType() == AppEvents.Init) {
 			initUI();
-			fireEvent(AppEvents.LoadMessage);
+//			fireEvent(AppEvents.LoadMessage);
 		} else if (event.getType() == AppEvents.LoadMessage) {
 			loadMessage();
 		}
 	}
-
+	
 	private void loadMessage() {
-		
-		messageService.findMessages(new AsyncCallback<List<MessageSZ>>() {
-
-			public void onSuccess(List<MessageSZ> messageSZList) {
-				messageListPanel.loadMessage(ModelHelper.convertToListModel(messageSZList));
-			}
-
-			public void onFailure(Throwable caught) {
-				Dispatcher.forwardEvent(AppEvents.Error, caught);
-
-			}
-		});
+		messageListPanel.loadMessage();
+//		messageService.findMessages(new AsyncCallback<List<MessageSZ>>() {
+//
+//			public void onSuccess(List<MessageSZ> messageSZList) {
+//				messageListPanel.loadMessage(ModelHelper.convertToListModel(messageSZList));
+//			}
+//
+//			public void onFailure(Throwable caught) {
+//				Dispatcher.forwardEvent(AppEvents.Error, caught);
+//
+//			}
+//		});
 
 	}
 }

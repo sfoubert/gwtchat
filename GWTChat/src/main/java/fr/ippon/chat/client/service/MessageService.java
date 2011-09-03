@@ -2,9 +2,12 @@ package fr.ippon.chat.client.service;
 
 import java.util.List;
 
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+import fr.ippon.chat.client.model.MessageModel;
 import fr.ippon.chat.shared.MessageSZ;
 
 /**
@@ -19,4 +22,6 @@ public interface MessageService extends RemoteService {
 	Integer countMessages();
 
 	List<MessageSZ> findMessages();
+	
+	PagingLoadResult<MessageModel> findMessages(PagingLoadConfig loadConfig);
 }
