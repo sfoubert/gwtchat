@@ -7,6 +7,8 @@
  */
 package fr.ippon.chat.client.mvc;
 
+import java.util.logging.Logger;
+
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
@@ -21,6 +23,8 @@ import fr.ippon.chat.client.service.MessageServiceAsync;
 
 public class AppController extends Controller {
 
+	private static final Logger log = Logger.getLogger(AppController.class.getName());
+	
 	private AppView appView;
 
 	 private MessageServiceAsync messageService;
@@ -50,6 +54,7 @@ public class AppController extends Controller {
 	}
 
 	protected void onError(AppEvent ae) {
+		log.info("Error" + ae.<Object> getData());
 		Info.display("Error" , "" + ae.<Object> getData());
 	}
 

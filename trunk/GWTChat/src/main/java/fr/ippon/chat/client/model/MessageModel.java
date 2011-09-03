@@ -8,6 +8,7 @@
 package fr.ippon.chat.client.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.extjs.gxt.ui.client.data.BaseTreeModel;
 
@@ -17,11 +18,12 @@ public class MessageModel extends BaseTreeModel implements Serializable {
 
 	}
 
-	public MessageModel(Long id, String firstName, String lastName,
+	public MessageModel(Long id, String firstName, String lastName, Date creationDate, 
 			String message) {
 		set("id", id);
 		set("firstName", firstName);
 		set("lastName", lastName);
+		set("creationDate", creationDate);
 		set("message", message);
 	}
 
@@ -36,7 +38,11 @@ public class MessageModel extends BaseTreeModel implements Serializable {
 	public String getLastName() {
 		return (String) get("lastName");
 	}
-
+	
+	public Date getCreationDate() {
+		return (Date) get("creationDate");
+	}
+	
 	public String getMessage() {
 		return (String) get("message");
 	}

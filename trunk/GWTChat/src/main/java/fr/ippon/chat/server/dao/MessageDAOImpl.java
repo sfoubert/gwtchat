@@ -1,9 +1,11 @@
 package fr.ippon.chat.server.dao;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import fr.ippon.chat.server.EMF;
@@ -20,12 +22,16 @@ public class MessageDAOImpl extends AbstractDAO implements MessageDAO {
 	public void addMessage(String message) {
 		log.info("addMessage " + message);
 		EntityManager em = EMF.get().createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 		try {
 			Message m = new Message();
 			m.setFirstName("Sebastien");
 			m.setLastName("F");
+			m.setCreationDate(Calendar.getInstance().getTime());
 			m.setMessage(message);
 			em.persist(m);
+			tx.commit();
 		} finally {
 			em.close();
 		}
@@ -44,7 +50,7 @@ public class MessageDAOImpl extends AbstractDAO implements MessageDAO {
 
 	public List<Message> findMessages() {
 		log.info("findMessages");
-		Query query = getSession().createQuery("select m from Message m ");
+		Query query = getSession().createQuery("select m from Message m order by m.creationDate desc");
 		return query.getResultList();
 
 	}

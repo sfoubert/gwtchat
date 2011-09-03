@@ -15,8 +15,6 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import fr.ippon.chat.client.AppEvents;
@@ -54,7 +52,6 @@ public class MessageView extends View {
 			initUI();
 			fireEvent(AppEvents.LoadMessage);
 		} else if (event.getType() == AppEvents.LoadMessage) {
-
 			loadMessage();
 		}
 	}

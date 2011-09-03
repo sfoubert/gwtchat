@@ -17,6 +17,7 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.google.gwt.i18n.client.DateTimeFormat;
 
 import fr.ippon.chat.client.model.MessageModel;
 
@@ -46,9 +47,15 @@ public class MessageListPanel extends ContentPanel {
 		column.setAlignment(HorizontalAlignment.LEFT);
 		configs.add(column);
 		
+		column = new ColumnConfig("creationDate", "Date", 120);
+		column.setDateTimeFormat(DateTimeFormat.getFormat("MM/dd/yyyy HH:mm:ss"));
+		column.setAlignment(HorizontalAlignment.CENTER);
+		configs.add(column);
+		
 		column = new ColumnConfig();
 		column.setId("message");
 		column.setHeader("Message");
+		column.setToolTip("message");
 		column.setAlignment(HorizontalAlignment.LEFT);
 		configs.add(column);
 
