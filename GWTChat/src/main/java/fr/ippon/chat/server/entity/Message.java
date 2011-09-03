@@ -1,9 +1,14 @@
 package fr.ippon.chat.server.entity;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.google.appengine.api.datastore.Key;
 
@@ -18,7 +23,12 @@ public class Message {
 
 	private String lastName;
 
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creationDate;
+	
 	private String message;
+
 
 	public Key getKey() {
 		return key;
@@ -42,6 +52,14 @@ public class Message {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	public String getMessage() {

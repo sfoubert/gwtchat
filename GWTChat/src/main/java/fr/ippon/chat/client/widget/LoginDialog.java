@@ -7,6 +7,9 @@
  */
 package fr.ippon.chat.client.widget;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
@@ -14,6 +17,7 @@ import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.util.IconHelper;
 import com.extjs.gxt.ui.client.widget.Dialog;
+import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.Status;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.TextField;
@@ -29,6 +33,12 @@ public class LoginDialog extends Dialog {
   protected Button login;
   protected Status status;
 
+  private static Set<String> userList = new HashSet<String>();
+  static{
+	  userList.add("seb");
+	  userList.add("nadine");
+  }
+  
   public LoginDialog() {
     FormLayout layout = new FormLayout();
     layout.setLabelWidth(90);
@@ -105,27 +115,35 @@ public class LoginDialog extends Dialog {
     
   }
 
-  protected void onSubmit() {
-    status.show();
-    getButtonBar().disable();
-    Timer t = new Timer() {
+	protected void onSubmit() {
 
-      @Override
-      public void run() {
-        LoginDialog.this.hide();
-      }
+		if (userName != null && password != null
+				&& userList.contains(userName.getValue())
+				&& userList.contains(password.getValue())) {
+			status.show();
+			getButtonBar().disable();
+			Timer t = new Timer() {
 
-    };
-    t.schedule(2000);
-  }
+				@Override
+				public void run() {
+					LoginDialog.this.hide();
+
+				}
+
+			};
+			t.schedule(2000);
+		} else {
+			Info.display("Echec", "Erreur de login/password");
+		}
+	}
 
   protected boolean hasValue(TextField<String> field) {
     return field.getValue() != null && field.getValue().length() > 0;
   }
 
   protected void validate() {
-    login.setEnabled(hasValue(userName) && hasValue(password)
-        && password.getValue().length() > 3);
+		login.setEnabled(hasValue(userName) && hasValue(password)
+				&& password.getValue().length() > 3);
   }
 
 }

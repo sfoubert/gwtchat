@@ -13,6 +13,7 @@ public class SZHelper {
 		messageSZ.setId(message.getKey().getId());
 		messageSZ.setFirstName(message.getFirstName());
 		messageSZ.setLastName(message.getLastName());
+		messageSZ.setCreationDate(message.getCreationDate());
 		messageSZ.setMessage(message.getMessage());
 		return messageSZ;
 	}
@@ -21,6 +22,7 @@ public class SZHelper {
 		Message message = new Message();
 		message.setFirstName(messageSZ.getFirstName());
 		message.setLastName(messageSZ.getLastName());
+		message.setCreationDate(messageSZ.getCreationDate());
 		message.setMessage(messageSZ.getMessage());
 		return message;
 	}

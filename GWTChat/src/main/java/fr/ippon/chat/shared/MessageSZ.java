@@ -1,6 +1,7 @@
 package fr.ippon.chat.shared;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 public class MessageSZ implements Serializable {
@@ -11,6 +12,8 @@ public class MessageSZ implements Serializable {
 
 	private String lastName;
 
+	private Date creationDate;
+	
 	private String message;
 
 	public Long getId() {
@@ -35,6 +38,14 @@ public class MessageSZ implements Serializable {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	public String getMessage() {
