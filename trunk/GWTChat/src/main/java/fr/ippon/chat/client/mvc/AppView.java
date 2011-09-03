@@ -9,7 +9,6 @@ package fr.ippon.chat.client.mvc;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
-import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
@@ -116,8 +115,10 @@ public class AppView extends View {
 	private void createCenter() {
 		centerPanel = new ContentPanel();
 		centerPanel.setHeading("Messages");
-		centerPanel.setScrollMode(Scroll.AUTOX);
+		centerPanel.setBodyBorder(true);
+//		centerPanel.setScrollMode(Scroll.AUTOX);
 		centerPanel.setLayout(new FitLayout());
+		westPanel.setLayoutOnChange(true);
 
 		BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
 		data.setMargins(new Margins(5, 10, 5, 5));
@@ -142,5 +143,6 @@ public class AppView extends View {
 			initUI();
 		}
 	}
+
 
 }

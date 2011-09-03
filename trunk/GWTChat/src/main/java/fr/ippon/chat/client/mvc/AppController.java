@@ -12,7 +12,7 @@ import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.extjs.gxt.ui.client.widget.Info;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import fr.ippon.chat.client.AppEvents;
@@ -50,13 +50,11 @@ public class AppController extends Controller {
 	}
 
 	protected void onError(AppEvent ae) {
-		System.out.println("error: " + ae.<Object> getData());
+		Info.display("Error" , "" + ae.<Object> getData());
 	}
 
 	private void onInit(AppEvent event) {
 		forwardToView(appView, event);
-		messageService = (MessageServiceAsync) Registry.get(GWTChat.MESSAGE_SERVICE);
-
 	}
 
 	private void onLogin(AppEvent event) {
@@ -71,7 +69,8 @@ public class AppController extends Controller {
 		messageService.addMessage(message, new AsyncCallback<Void>() {
 			
 			public void onSuccess(Void result) {
-				MessageBox.info("Message", "Message ajoute", null);
+				Info.display("Message", "Message ajoute");
+				Dispatcher.forwardEvent(AppEvents.LoadMessage);
 			}
 			
 			public void onFailure(Throwable caught) {
