@@ -1,18 +1,11 @@
-package fr.ippon.chat.server.entity;
+package fr.ippon.chat.shared;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.io.Serializable;
 
-import com.google.appengine.api.datastore.Key;
 
-@Entity
-public class Message {
+public class MessageSZ implements Serializable {
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Key key;
+	private Long id;
 
 	private String firstName;
 
@@ -20,12 +13,12 @@ public class Message {
 
 	private String message;
 
-	public Key getKey() {
-		return key;
+	public Long getId() {
+		return id;
 	}
 
-	public void setKey(Key key) {
-		this.key = key;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {

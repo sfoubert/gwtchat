@@ -18,5 +18,7 @@ public class AppEvents {
   public static final EventType Error = new EventType();
 
   public static final EventType AddMessage = new EventType();
+  
+  public static final EventType LoadMessage = new EventType();
 
 }

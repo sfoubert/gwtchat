@@ -1,11 +1,10 @@
 package fr.ippon.chat.server.dao;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import com.google.appengine.api.datastore.Key;
 
 import fr.ippon.chat.server.EMF;
 import fr.ippon.chat.server.entity.Message;
@@ -13,41 +12,39 @@ import fr.ippon.chat.server.entity.Message;
 /**
  * The DAO implementation of Message.
  */
-public class MessageDAOImpl implements MessageDAO {
+public class MessageDAOImpl extends AbstractDAO implements MessageDAO {
+	
+	private static final Logger log = Logger.getLogger(MessageDAOImpl.class.getName());
 
-	   private EntityManager getSession() {
-		      return EMF.get().createEntityManager();
-		   }
 	
 	public void addMessage(String message) {
-		System.out.println("addMessage " + message);
+		log.info("addMessage " + message);
+		EntityManager em = EMF.get().createEntityManager();
 		try {
 			Message m = new Message();
-			m.setMessage("Coucou");
 			m.setFirstName("Sebastien");
-			getSession().persist(m);
+			m.setLastName("F");
+			m.setMessage(message);
+			em.persist(m);
 		} finally {
-			getSession().close();
+			em.close();
 		}
 	}
 
-	public Message getMessage(Key key) {
-		System.out.println("getMessage " + key);
-		EntityManager em = EMF.get().createEntityManager();
-		return getSession().find(Message.class, key);
+	public Message getMessage(Long id) {
+		log.info("getMessage " + id);
+		return getSession().find(Message.class, id);
 	}
 
 	public Integer countMessages() {
-		System.out.println("select count(m.key) from Message m ");
-		EntityManager em = EMF.get().createEntityManager();
+		log.info("select count(m.id) from Message m ");
 		Query query = getSession().createQuery("select count(m.key) from Message m ");
 		return (Integer) query.getSingleResult();
 	}
 
 	public List<Message> findMessages() {
-		System.out.println("findMessages");
-		EntityManager em = EMF.get().createEntityManager();
-		Query query = getSession().createQuery("select m.* from Message m ");
+		log.info("findMessages");
+		Query query = getSession().createQuery("select m from Message m ");
 		return query.getResultList();
 
 	}
