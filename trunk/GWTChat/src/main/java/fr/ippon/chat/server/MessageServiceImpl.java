@@ -2,9 +2,14 @@ package fr.ippon.chat.server;
 
 import java.util.List;
 
+import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import fr.ippon.chat.client.model.MessageModel;
 import fr.ippon.chat.client.service.MessageService;
+import fr.ippon.chat.client.util.ModelHelper;
 import fr.ippon.chat.server.dao.MessageDAO;
 import fr.ippon.chat.server.dao.MessageDAOImpl;
 import fr.ippon.chat.server.entity.Message;
@@ -41,6 +46,16 @@ public class MessageServiceImpl extends RemoteServiceServlet implements
 	public List<MessageSZ> findMessages() {
 		List<Message> messageList = messageDAO.findMessages();
 		return SZHelper.convertToListSZ(messageList);
+	}
+	
+	public PagingLoadResult<MessageModel> findMessages(PagingLoadConfig loadConfig) {
+		
+		Integer nbMessages = messageDAO.countMessages();
+		
+		List<Message> messageList = messageDAO.findMessages(
+				loadConfig.getOffset(), loadConfig.getLimit());
+		List<MessageSZ> messageSZList = SZHelper.convertToListSZ(messageList);
+		return new BasePagingLoadResult<MessageModel>(ModelHelper.convertToListModel(messageSZList), loadConfig.getOffset() , nbMessages);
 	}
 
 }

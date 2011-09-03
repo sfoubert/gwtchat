@@ -52,6 +52,14 @@ public class MessageDAOImpl extends AbstractDAO implements MessageDAO {
 		log.info("findMessages");
 		Query query = getSession().createQuery("select m from Message m order by m.creationDate desc");
 		return query.getResultList();
+	}
+	
+	public List<Message> findMessages(int offset, int limit) {
+		log.info("findMessages " + offset + " / " + limit);
+		Query query = getSession().createQuery("select m from Message m order by m.creationDate desc");
+		query.setFirstResult(offset);
+		query.setMaxResults(limit);
+		return query.getResultList();
 
 	}
 

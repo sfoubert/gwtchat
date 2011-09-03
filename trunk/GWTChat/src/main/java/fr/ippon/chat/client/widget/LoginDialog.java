@@ -63,13 +63,13 @@ public class LoginDialog extends Dialog {
     };
 
     userName = new TextField<String>();
-    userName.setMinLength(4);
+    userName.setMinLength(3);
     userName.setFieldLabel("Username");
     userName.addKeyListener(keyListener);
     add(userName);
 
     password = new TextField<String>();
-    password.setMinLength(4);
+    password.setMinLength(3);
     password.setPassword(true);
     password.setFieldLabel("Password");
     password.addKeyListener(keyListener);
@@ -143,7 +143,7 @@ public class LoginDialog extends Dialog {
 
   protected void validate() {
 		login.setEnabled(hasValue(userName) && hasValue(password)
-				&& password.getValue().length() > 3);
+				&& password.getValue().length() > 2);
   }
 
 }

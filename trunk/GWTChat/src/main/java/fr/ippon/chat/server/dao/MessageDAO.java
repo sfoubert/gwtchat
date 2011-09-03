@@ -13,4 +13,6 @@ public interface MessageDAO {
 	Integer countMessages();
 
 	List<Message> findMessages();
+	
+	List<Message> findMessages(int offset, int limit);
 }
