@@ -1,2 +1,0 @@
-serviceClass: fr.ippon.chat.client.service.MessageService
-path: 62E5D88B089F6CD3F1E1F9CF7C450588.gwt.rpc
