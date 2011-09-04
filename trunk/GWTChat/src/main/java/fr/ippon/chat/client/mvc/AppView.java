@@ -63,7 +63,9 @@ public class AppView extends View {
 	private void initUI() {
 		viewport = new Viewport();
 		viewport.setLayout(new BorderLayout());
-
+//		viewport.setStyleAttribute("padding", "10px");
+		viewport.setStyleAttribute("background-color", "white");
+		
 		createNorth();
 		createWest();
 		createCenter();
@@ -75,7 +77,7 @@ public class AppView extends View {
 		Registry.register(WEST_PANEL, westPanel);
 		Registry.register(CENTER_PANEL, centerPanel);
 		Registry.register(SOUTH_PANEL, southPanel);
-
+		
 		RootPanel.get().add(viewport);
 	}
 
@@ -92,7 +94,7 @@ public class AppView extends View {
 		northData.setFloatable(true);
 		northData.setHideCollapseTool(true);
 		northData.setSplit(true);
-		northData.setMargins(new Margins(0, 10, 5, 0));
+		northData.setMargins(new Margins(0, 20, 5, 0));
 
 		viewport.add(northPanel, northData);
 	}
@@ -116,9 +118,10 @@ public class AppView extends View {
 		centerPanel = new MessageListPanel();
 
 		BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
-		data.setMargins(new Margins(5, 10, 5, 5));
+		data.setMargins(new Margins(0, 20, 0, 0));
 
 		viewport.add(centerPanel, data);
+
 	}
 	
 	private void createSouth() {
@@ -128,7 +131,7 @@ public class AppView extends View {
 	    southData.setSplit(true);
 	    southData.setCollapsible(true);
 	    southData.setFloatable(true);
-	    southData.setMargins(new Margins(5, 10, 5, 0));
+	    southData.setMargins(new Margins(5, 20, 0, 0));
 
 		viewport.add(southPanel, southData);
 	}
