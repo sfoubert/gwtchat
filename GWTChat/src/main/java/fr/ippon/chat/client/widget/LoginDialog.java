@@ -15,6 +15,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.state.StateManager;
 import com.extjs.gxt.ui.client.util.IconHelper;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.Info;
@@ -126,6 +127,7 @@ public class LoginDialog extends Dialog {
 
 				@Override
 				public void run() {
+					StateManager.get().set("userName", userName.getValue());
 					LoginDialog.this.hide();
 
 				}

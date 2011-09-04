@@ -6,7 +6,7 @@ import fr.ippon.chat.server.entity.Message;
 
 public interface MessageDAO {
 	
-	void addMessage(String message);
+	void addMessage(String firstName, String message);
 
 	Message getMessage(Long id);
 

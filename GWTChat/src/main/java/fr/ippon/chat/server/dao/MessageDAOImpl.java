@@ -19,14 +19,14 @@ public class MessageDAOImpl extends AbstractDAO implements MessageDAO {
 	private static final Logger log = Logger.getLogger(MessageDAOImpl.class.getName());
 
 	
-	public void addMessage(String message) {
+	public void addMessage(String firstName, String message) {
 		log.info("addMessage " + message);
 		EntityManager em = EMF.get().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		try {
 			Message m = new Message();
-			m.setFirstName("Sebastien");
+			m.setFirstName(firstName);
 			m.setLastName("F");
 			m.setCreationDate(Calendar.getInstance().getTime());
 			m.setMessage(message);
