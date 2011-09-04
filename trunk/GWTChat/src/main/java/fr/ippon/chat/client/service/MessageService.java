@@ -15,7 +15,7 @@ import fr.ippon.chat.shared.MessageSZ;
  */
 @RemoteServiceRelativePath("message")
 public interface MessageService extends RemoteService {
-	void addMessage(String message);
+	void addMessage(String firstName, String message);
 
 	MessageSZ getMessage(Long id);
 

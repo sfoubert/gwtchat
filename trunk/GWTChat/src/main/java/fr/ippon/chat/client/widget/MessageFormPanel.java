@@ -12,6 +12,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.state.StateManager;
 import com.extjs.gxt.ui.client.util.IconHelper;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
@@ -20,6 +21,7 @@ import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 
 import fr.ippon.chat.client.AppEvents;
+import fr.ippon.chat.shared.MessageSZ;
 
 public class MessageFormPanel extends FormPanel {
 
@@ -54,8 +56,14 @@ public class MessageFormPanel extends FormPanel {
 	}
 
 	private void onSubmit() {
-		EventType event = AppEvents.AddMessage;
-		Dispatcher.forwardEvent(event, messageArea.getValue());
+		
+		String firstName = (String)StateManager.get().get("userName");
+		
+		MessageSZ messageSZ = new MessageSZ(); 
+		messageSZ.setFirstName(firstName);
+		messageSZ.setMessage(messageArea.getValue());
+		
+		Dispatcher.forwardEvent(AppEvents.AddMessage, messageSZ);
 
 	}
 

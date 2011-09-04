@@ -7,22 +7,16 @@
  */
 package fr.ippon.chat.client.mvc;
 
-import java.util.List;
-
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import fr.ippon.chat.client.AppEvents;
 import fr.ippon.chat.client.GWTChat;
 import fr.ippon.chat.client.service.MessageServiceAsync;
-import fr.ippon.chat.client.util.ModelHelper;
 import fr.ippon.chat.client.widget.MessageListPanel;
-import fr.ippon.chat.shared.MessageSZ;
 
 public class MessageView extends View {
 
@@ -42,10 +36,11 @@ public class MessageView extends View {
 
 	protected void initUI() {
 		ContentPanel center = (ContentPanel) Registry.get(AppView.CENTER_PANEL);
-		messageListPanel = new MessageListPanel();
-		center.removeAll();
-		center.add(messageListPanel);
-		center.layout();
+		messageListPanel = (MessageListPanel)center;
+//		messageListPanel = new MessageListPanel();
+//		center.removeAll();
+//		center.add(messageListPanel);
+//		center.layout();
 	}
 
 	protected void handleEvent(AppEvent event) {
@@ -59,17 +54,5 @@ public class MessageView extends View {
 	
 	private void loadMessage() {
 		messageListPanel.loadMessage();
-//		messageService.findMessages(new AsyncCallback<List<MessageSZ>>() {
-//
-//			public void onSuccess(List<MessageSZ> messageSZList) {
-//				messageListPanel.loadMessage(ModelHelper.convertToListModel(messageSZList));
-//			}
-//
-//			public void onFailure(Throwable caught) {
-//				Dispatcher.forwardEvent(AppEvents.Error, caught);
-//
-//			}
-//		});
-
 	}
 }

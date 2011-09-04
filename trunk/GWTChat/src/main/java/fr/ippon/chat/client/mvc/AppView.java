@@ -23,12 +23,12 @@ import com.extjs.gxt.ui.client.widget.Viewport;
 import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import fr.ippon.chat.client.AppEvents;
 import fr.ippon.chat.client.widget.LoginDialog;
 import fr.ippon.chat.client.widget.MessageFormPanel;
+import fr.ippon.chat.client.widget.MessageListPanel;
 
 public class AppView extends View {
 
@@ -113,12 +113,7 @@ public class AppView extends View {
 	}
 
 	private void createCenter() {
-		centerPanel = new ContentPanel();
-		centerPanel.setHeading("Messages");
-		centerPanel.setBodyBorder(true);
-//		centerPanel.setScrollMode(Scroll.AUTOX);
-		centerPanel.setLayout(new FitLayout());
-		westPanel.setLayoutOnChange(true);
+		centerPanel = new MessageListPanel();
 
 		BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
 		data.setMargins(new Margins(5, 10, 5, 5));

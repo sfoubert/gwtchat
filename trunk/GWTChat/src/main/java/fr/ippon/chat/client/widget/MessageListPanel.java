@@ -14,6 +14,7 @@ import java.util.Map;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.SortDir;
+import com.extjs.gxt.ui.client.core.XTemplate;
 import com.extjs.gxt.ui.client.data.BasePagingLoadConfig;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.ModelData;
@@ -29,6 +30,7 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.RowExpander;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -40,7 +42,7 @@ import fr.ippon.chat.client.service.MessageServiceAsync;
 
 public class MessageListPanel extends ContentPanel {
 	
-	private static final int PAGINATION = 5;
+	private static final int PAGINATION = 10;
 	private ColumnModel cm;
 	ListStore<MessageModel> store;
 	
@@ -64,14 +66,14 @@ public class MessageListPanel extends ContentPanel {
 		getAriaSupport().setPresentation(true);
 
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
-
+		
 		ColumnConfig column = new ColumnConfig();
-		column.setId("id");
-		column.setHeader("Id");
-		column.setWidth(20);
-		column.setRowHeader(true);
-		configs.add(column);
 
+		XTemplate tpl = XTemplate.create("<p><b>Detail:</b> {message}</p>");
+	    RowExpander expander = new RowExpander();
+	    expander.setTemplate(tpl);
+	    configs.add(expander);
+		
 		column = new ColumnConfig("firstName", "Prenom", 100);
 		column.setAlignment(HorizontalAlignment.LEFT);
 		configs.add(column);
@@ -87,7 +89,7 @@ public class MessageListPanel extends ContentPanel {
 		column.setToolTip("message");
 		column.setAlignment(HorizontalAlignment.LEFT);
 		configs.add(column);
-
+		
 		// loader  
 	    final PagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(  
 	        proxy);
@@ -103,13 +105,14 @@ public class MessageListPanel extends ContentPanel {
 
 		cm = new ColumnModel(configs);
 		
-		setBodyBorder(true);
+		setBodyBorder(false);
 		setHeaderVisible(false);
 		setButtonAlign(HorizontalAlignment.CENTER);
 		setLayout(new FitLayout());
 
 		final Grid<MessageModel> grid = new Grid<MessageModel>(store, cm);
 	    grid.setStateId("pagingGridExample");
+	    grid.addPlugin(expander); 
 	    grid.setStateful(false);
 	    grid.addListener(Events.Attach, new Listener<GridEvent<MessageModel>>() {
 	      public void handleEvent(GridEvent<MessageModel> be) {

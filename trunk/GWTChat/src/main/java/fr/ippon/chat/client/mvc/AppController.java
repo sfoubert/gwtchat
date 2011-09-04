@@ -20,6 +20,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import fr.ippon.chat.client.AppEvents;
 import fr.ippon.chat.client.GWTChat;
 import fr.ippon.chat.client.service.MessageServiceAsync;
+import fr.ippon.chat.shared.MessageSZ;
 
 public class AppController extends Controller {
 
@@ -70,8 +71,9 @@ public class AppController extends Controller {
 		forwardToView(appView, event);
 		messageService = (MessageServiceAsync) Registry.get(GWTChat.MESSAGE_SERVICE);
 		
-		String message = event.getData();
-		messageService.addMessage(message, new AsyncCallback<Void>() {
+		MessageSZ messageSZ = event.getData();
+		
+		messageService.addMessage(messageSZ.getFirstName(), messageSZ.getMessage(), new AsyncCallback<Void>() {
 			
 			public void onSuccess(Void result) {
 				Info.display("Message", "Message ajoute");

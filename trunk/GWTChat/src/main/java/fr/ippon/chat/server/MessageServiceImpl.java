@@ -30,8 +30,8 @@ public class MessageServiceImpl extends RemoteServiceServlet implements
 		messageDAO = new MessageDAOImpl();
 	}
 
-	public void addMessage(String message) {
-		messageDAO.addMessage(message);
+	public void addMessage(String firstName, String message) {
+		messageDAO.addMessage(firstName, message);
 	}
 
 	public MessageSZ getMessage(Long id) {

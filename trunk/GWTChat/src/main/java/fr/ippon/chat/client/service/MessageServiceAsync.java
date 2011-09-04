@@ -13,7 +13,7 @@ import fr.ippon.chat.shared.MessageSZ;
  * The async counterpart of <code>MessageService</code>.
  */
 public interface MessageServiceAsync {
-	void addMessage(String message, AsyncCallback<Void> callback);
+	void addMessage(String firstName, String message, AsyncCallback<Void> callback);
 
 	void getMessage(Long id, AsyncCallback<MessageSZ> callback);
 
