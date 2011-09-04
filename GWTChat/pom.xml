@@ -56,6 +56,20 @@
       <classifier>sources</classifier>
       <scope>provided</scope>
     </dependency>
+	<!-- Ext-GWT -->
+	<dependency>
+		<groupId>com.extjs.gxt</groupId>
+		<artifactId>gxt</artifactId>
+		<version>2.2.4</version>
+		<scope>provided</scope>
+	</dependency>
+	<!-- appengine / datanucleus -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>com.google.appengine</groupId> -->
+<!-- 		<artifactId>datanucleus-jpa</artifactId> -->
+<!-- 		<version>1.1.5</version> -->
+<!-- 		<scope>runtime</scope> -->
+<!-- 	</dependency> -->
   </dependencies>
   
   <build>

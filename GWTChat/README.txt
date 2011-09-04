@@ -82,3 +82,22 @@ mvn package       # generate a .war package ready to deploy
 
 For more information about other available goals, read maven and gwt-maven-plugin 
 documentation (http://maven.apache.org, http://mojo.codehaus.org/gwt-maven-plugin)  
+
+
+-- Custom
+
+mvn deploy:deploy-file  -Dpackaging=jar -DartifactId=gxt -Dversion=2.2.4 -Dfile=gxt-2.2.4-gwt22.jar -DgroupId=com.extjs.gxt -DgeneratePom=true -DrepositoryId=nexus -Durl=http://localhost:8081/nexus/content/repositories/thirdparty
+
+    <server>
+      <id>nexus</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+    
+    <mirror>
+      <!--This sends everything else to /public -->
+      <id>nexus</id>
+      <mirrorOf>*</mirrorOf>
+      <url>http://localhost:8081/nexus/content/groups/public</url>
+    </mirror>
+  </mirrors>
