@@ -6,24 +6,47 @@
 <web-app>
   
   <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>fr.ippon.chat.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
+    
   <servlet>
     <servlet-name>messageServlet</servlet-name>
     <servlet-class>fr.ippon.chat.server.MessageServiceImpl</servlet-class>
   </servlet>
+
+  <servlet>
+    <servlet-name>emailServlet</servlet-name>
+    <servlet-class>fr.ippon.chat.server.EmailServiceImpl</servlet-class>
+  </servlet>
   
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/gwtchat/greet</url-pattern>
-  </servlet-mapping>
+  <servlet>
+    <servlet-name>feedServlet</servlet-name>
+    <servlet-class>fr.ippon.chat.server.FeedServiceImpl</servlet-class>
+  </servlet>
+    
+  <servlet>
+  	<servlet-name>RssServlet</servlet-name>
+  	<display-name>RssServlet</display-name>
+  	<description></description>
+  	<servlet-class>fr.ippon.chat.server.servlet.RssServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>messageServlet</servlet-name>
     <url-pattern>/gwtchat/message</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>emailServlet</servlet-name>
+    <url-pattern>/gwtchat/email</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>feedServlet</servlet-name>
+    <url-pattern>/gwtchat/feed</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>RssServlet</servlet-name>
+  	<url-pattern>/RssServlet</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

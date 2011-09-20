@@ -19,6 +19,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import fr.ippon.chat.client.AppEvents;
 import fr.ippon.chat.client.GWTChat;
+import fr.ippon.chat.client.service.EmailServiceAsync;
 import fr.ippon.chat.client.service.MessageServiceAsync;
 import fr.ippon.chat.shared.MessageSZ;
 
@@ -29,6 +30,8 @@ public class AppController extends Controller {
 	private AppView appView;
 
 	 private MessageServiceAsync messageService;
+	 
+	 private EmailServiceAsync emailService;
 
 	public AppController() {
 		registerEventTypes(AppEvents.Init);
@@ -70,14 +73,28 @@ public class AppController extends Controller {
 	private void onAddMessage(AppEvent event) {
 		forwardToView(appView, event);
 		messageService = (MessageServiceAsync) Registry.get(GWTChat.MESSAGE_SERVICE);
+		emailService = (EmailServiceAsync) Registry.get(GWTChat.EMAIL_SERVICE);
 		
 		MessageSZ messageSZ = event.getData();
 		
 		messageService.addMessage(messageSZ.getFirstName(), messageSZ.getMessage(), new AsyncCallback<Void>() {
 			
 			public void onSuccess(Void result) {
-				Info.display("Message", "Message ajoute");
-				Dispatcher.forwardEvent(AppEvents.LoadMessage);
+				Info.display("Message", "Message ajoute");				
+
+				emailService.sendMail(new AsyncCallback<Void>() {
+					
+					public void onSuccess(Void result) {
+						Info.display("Mail", "Mail envoyee");
+						Dispatcher.forwardEvent(AppEvents.LoadMessage);
+					}
+					
+					public void onFailure(Throwable caught) {
+						Dispatcher.forwardEvent(AppEvents.Error, caught);
+						
+					}
+				});
+
 			}
 			
 			public void onFailure(Throwable caught) {
@@ -85,6 +102,8 @@ public class AppController extends Controller {
 				
 			}
 		});
+		
+		
 	}
 
 }
